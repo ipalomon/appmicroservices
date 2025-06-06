@@ -1,0 +1,8 @@
+<doctrine-mapping>
+    <entity name="App\Producto\Domain\Model\Producto" table="productos">
+        <id name="id" type="string" column="id" />
+        <field name="nombre" type="string" />
+        <field name="referencia" type="string" />
+        <field name="observaciones" type="string" nullable="true" />
+    </entity>
+</doctrine-mapping>
