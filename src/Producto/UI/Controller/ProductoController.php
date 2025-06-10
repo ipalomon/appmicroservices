@@ -3,20 +3,18 @@
 namespace App\Producto\UI\Controller;
 
 use App\Producto\Application\Command\CrearProductoCommand;
+use League\Tactician\CommandBus;
 use App\Producto\Application\DTO\ProductoDTO;
 use App\Producto\Application\Command\RecuperarProductoCommand;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
-use League\Tactician\CommandBus;
 
 class ProductoController extends AbstractController
 {
-    public function __construct(private CommandBus $commandBus) {}
-
     #[Route('/producto', name: 'crear_producto', methods: ['POST'])]
-    public function crear(Request $request): JsonResponse
+    public function crear(Request $request, CommandBus $commandBus): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
         $dto = new ProductoDTO();
@@ -24,7 +22,9 @@ class ProductoController extends AbstractController
         $dto->referencia = $data['referencia'];
         $dto->observaciones = $data['observaciones'] ?? null;
 
-        $this->commandBus->handle(new CrearProductoCommand($dto));
+        $command = new CrearProductoCommand($dto);
+
+        $commandBus->handle($command);
         return new JsonResponse(['status' => 'Producto creado'], 201);
     }
 

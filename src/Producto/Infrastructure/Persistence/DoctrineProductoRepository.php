@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Producto\Infrastructure\Persistence;
 
 use App\Producto\Domain\Model\Producto;
@@ -9,7 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class DoctrineProductoRepository implements ProductoRepositoryInterface
 {
-    public function __construct(private EntityManagerInterface $em) {}
+    public function __construct(private readonly EntityManagerInterface $em) {}
 
     public function guardar(Producto $producto): void
     {
@@ -21,4 +20,11 @@ class DoctrineProductoRepository implements ProductoRepositoryInterface
     {
         return $this->em->getRepository(Producto::class)->find((string)$id);
     }
+
+    public function eliminar(Producto $producto): void
+    {
+        $this->em->remove($producto);
+        $this->em->flush();
+    }
 }
+
