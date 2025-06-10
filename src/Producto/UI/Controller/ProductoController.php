@@ -29,9 +29,9 @@ class ProductoController extends AbstractController
     }
 
     #[Route('/producto/{id}', name: 'recuperar_producto', methods: ['GET'])]
-    public function recuperar(string $id): JsonResponse
+    public function recuperar(string $id, CommandBus $commandBus): JsonResponse
     {
-        $producto = $this->commandBus->handle(new RecuperarProductoCommand($id));
+        $producto = $commandBus->handle(new RecuperarProductoCommand($id));
         return new JsonResponse([
             'id' => (string) $producto->getId(),
             'nombre' => $producto->getNombre(),
