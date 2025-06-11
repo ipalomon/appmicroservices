@@ -27,7 +27,7 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 # Establecer el directorio de trabajo
 WORKDIR /var/www/html
 
-# Copiar todo el proyecto (esto asegura que composer.json ya está dentro del contenedor)
+# Copiar all the proyecto (esto asegura que composer.json ya está dentro del contenedor)
 COPY . .
 
 # Ejecutar Composer install
