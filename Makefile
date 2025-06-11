@@ -1,4 +1,4 @@
-# Variables
+# Variables docker-compose build, docker-compose up -d --build
 COMPOSE = docker-compose
 PHP = $(COMPOSE) exec web php
 CONSOLE = $(PHP) bin/console

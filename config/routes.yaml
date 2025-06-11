@@ -1,5 +1,6 @@
+# config/routes.yaml
 controllers:
     resource:
-        path: ../src/Producto/UI/Controller/
+        path: ../src/Producto/UI/Controller
         namespace: App\Producto\UI\Controller
     type: attribute

@@ -2,6 +2,8 @@
 
 namespace App\Producto\Domain\Model;
 
+use InvalidArgumentException;
+
 class Producto
 {
     private ProductoId $id;
@@ -21,7 +23,7 @@ class Producto
     private function assertValidNombre(string $nombre): void
     {
         if (empty($nombre)) {
-            throw new \InvalidArgumentException('El nombre no puede estar vacío');
+            throw new InvalidArgumentException('El nombre no puede estar vacío');
         }
     }
 

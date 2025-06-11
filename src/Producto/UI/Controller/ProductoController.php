@@ -9,7 +9,7 @@ use App\Producto\Application\Command\RecuperarProductoCommand;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 class ProductoController extends AbstractController
 {
@@ -24,8 +24,15 @@ class ProductoController extends AbstractController
 
         $command = new CrearProductoCommand($dto);
 
-        $commandBus->handle($command);
-        return new JsonResponse(['status' => 'Producto creado'], 201);
+        $productoEvento = $commandBus->handle($command);
+        
+        return new JsonResponse([
+            'status' => 'Producto creado', 
+            'id' => $productoEvento->getId(),
+            'nombre' => $productoEvento->getNombre(),
+            'referencia' => $productoEvento->getReferencia(),
+            'observaciones' => $productoEvento->getObservaciones(),
+        ], 201);
     }
 
     #[Route('/producto/{id}', name: 'recuperar_producto', methods: ['GET'])]

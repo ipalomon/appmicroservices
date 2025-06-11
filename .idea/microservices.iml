@@ -85,6 +85,9 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php84" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/process" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/stopwatch" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/league/tactician-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/league/tactician-container" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/league/tactician-logger" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

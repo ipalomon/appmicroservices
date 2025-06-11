@@ -10,17 +10,18 @@ use App\Producto\Domain\Event\ProductoCreado;
 class CrearProductoHandler
 {
     public function __construct(
-        private ProductoRepositoryInterface $repository,
-        private EventDispatcherInterface $dispatcher
+        private readonly ProductoRepositoryInterface $repository,
+        private readonly EventDispatcherInterface    $dispatcher
     ) {}
 
-    public function __invoke(CrearProductoCommand $command): void
+    public function handle(CrearProductoCommand $command): Producto
     {
         $id = new ProductoId();
         $dto = $command->dto;
 
         $producto = new Producto($id, $dto->nombre, $dto->referencia, $dto->observaciones);
         $this->repository->guardar($producto);
-        $this->dispatcher->dispatch(new ProductoCreado($producto));
+        $productoGuardadoEvento = $this->dispatcher->dispatch(new ProductoCreado($producto));
+        return $productoGuardadoEvento->getProducto();
     }
 }

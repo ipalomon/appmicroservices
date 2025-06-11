@@ -12,8 +12,8 @@ class DoctrineProductoRepository implements ProductoRepositoryInterface
 
     public function guardar(Producto $producto): void
     {
-        $this->em->persist($producto);
-        $this->em->flush();
+       // $this->em->persist($producto);
+       // $this->em->flush();
     }
 
     public function buscarPorId(ProductoId $id): ?Producto
