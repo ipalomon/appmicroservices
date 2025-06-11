@@ -16,4 +16,9 @@ class ProductoId
     {
         return $this->uuid;
     }
+
+    public function getUuId(): string
+    {
+        return $this->uuid;
+    }
 }

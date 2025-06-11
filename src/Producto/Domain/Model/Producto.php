@@ -14,7 +14,7 @@ class Producto
     public function __construct(ProductoId $id, string $nombre, string $referencia, ?string $observaciones)
     {
         $this->assertValidNombre($nombre);
-        $this->id = $id;
+        $this->id = new ProductoId();
         $this->nombre = $nombre;
         $this->referencia = $referencia;
         $this->observaciones = $observaciones;
@@ -27,7 +27,7 @@ class Producto
         }
     }
 
-    public function getId(): ProductoId { return $this->id; }
+    public function getId(): string { return $this->id->getUuId(); }
     public function getNombre(): string { return $this->nombre; }
     public function getReferencia(): string { return $this->referencia; }
     public function getObservaciones(): ?string { return $this->observaciones; }

@@ -20,8 +20,10 @@ class CrearProductoHandler
         $dto = $command->dto;
 
         $producto = new Producto($id, $dto->nombre, $dto->referencia, $dto->observaciones);
+
         $this->repository->guardar($producto);
         $productoGuardadoEvento = $this->dispatcher->dispatch(new ProductoCreado($producto));
+
         return $productoGuardadoEvento->getProducto();
     }
 }
